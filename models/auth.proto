@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package proto;
+
+service Auth {
+  rpc Check (Session) returns (User) {}
+  rpc Login (UserWithPassword) returns (Session) {}
+}
+
+message Session {
+  string sessionId = 1;
+}
+
+message User {
+  string email = 1;
+}
+
+message UserWithPassword {
+  string email = 1;
+  string password = 2;
+}

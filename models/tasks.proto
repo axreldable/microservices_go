@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package proto;
+
+import "auth.proto";
+
+message Task {
+  int32 id = 1;
+  string email = 2;
+  string title = 3;
+  bool done = 4;
+}
+
+message TasksList {
+  repeated Task tasks = 1;
+}
+
+service Tasks {
+  rpc List (User) returns (TasksList) {}
+  rpc Add (Task) returns (Task) {}
+  rpc Update (Task) returns (Task) {}
+}

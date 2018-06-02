@@ -1,0 +1,36 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <title>ToDo list</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome, {{.Email}}</h1>
+    <form action="/tasks" method="POST">
+      <input name="title"/>
+      <button class="button" type="submit">Add Task</button>
+    </form>
+    <h3>Your tasks:</h3>
+    <div>
+      {{range .Tasks}}
+        {{if .Done}}
+          <s><div>{{.Title}}</div></s>
+        {{else}}
+          <div>{{.Title}}
+            <form action="/tasks/{{.Id}}" method="POST" style="display: inline;">
+              <input type="hidden" name="title" value="{{.Title}}"/>
+              <button class="button button-clear" type="submit">Done</button>
+            </form>
+          </div>
+        {{end}}
+      {{end}}
+    </div>
+  </div>
+</body>
+</html>
+{{end}}
